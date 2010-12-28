@@ -27,9 +27,8 @@ public class CommandLineSpammer extends LSInterface {
 
             out.println("Enter password:");
             char[] pass = console.readPassword();
-            String password = new String(pass);
 
-            return new UserCredentials(user, password);
+            return new UserCredentials(user, pass);
         } catch (IOException e) {
             System.err.print("Error!: ");
             e.printStackTrace();

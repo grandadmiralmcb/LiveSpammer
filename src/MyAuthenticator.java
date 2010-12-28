@@ -27,7 +27,7 @@ public class MyAuthenticator extends Authenticator {
     protected PasswordAuthentication getPasswordAuthentication(UserCredentials
                                                                cred) {
             return new PasswordAuthentication(cred.getUserName(),
-                    cred.getPassword().toCharArray());
+                    cred.getPassword());
 
         }
 

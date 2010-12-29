@@ -1,6 +1,8 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Created by Jeff Stokes.
@@ -13,10 +15,11 @@ public class LSGUI extends JFrame {
     private JPasswordField passwordField;
     private JPanel mainPanel;
     private JTextField txtURL;
-    private JLabel lblParam;
     private JButton btnBrowse;
     private JTextField txtParam;
     private JButton btnHelp;
+    private JLabel lblParam;
+    private File paramFile;
 
     /**
      * Initialize the GUI
@@ -48,11 +51,17 @@ public class LSGUI extends JFrame {
      */
     ActionListener browseListener = new ActionListener() {
         public void actionPerformed(ActionEvent actionEvent) {
-            /**
-             * TODO
-             *
-             * add file browser to select parameter file
-             */
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Text Files", "txt");
+            chooser.setFileFilter(filter);
+
+            int rVal = chooser.showOpenDialog(LSGUI.this);
+
+            if (rVal == JFileChooser.APPROVE_OPTION) {
+                paramFile = chooser.getSelectedFile();
+                txtParam.setText(paramFile.getAbsolutePath());
+            }
         }
     };
 
@@ -77,7 +86,7 @@ public class LSGUI extends JFrame {
         return txtURL.getText();
     }
 
-    public String getParamFile() {
-        return txtParam.getText();
+    public File getParamFile() {
+        return paramFile;
     }
 }

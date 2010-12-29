@@ -5,10 +5,12 @@
  * Time: 11:16 AM
  */
 
+import java.io.File;
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 /**
  * Superclass for command line interface and GUI
@@ -20,7 +22,7 @@ public abstract class LSInterface {
     * of the xbox live messaging site
     * @return The created connection
     */
-    private URL createConnnection() {
+    private URL createConnection() {
         return createConnection(
                 "http://live.xbox.com/en-US/MessageCenter/Compose");
     }
@@ -69,23 +71,34 @@ public abstract class LSInterface {
 
     /**
      * Force implementation of this method
+     * will differ from CL to GUI
      * @return The credentials (containing username and password)
      */
     abstract UserCredentials getCredentials();
+
+    abstract HashMap<String, String> getParametersFromFile(File file)
+            throws MalformedParameterException;
+
+    abstract PostParameters getParameters() throws MalformedParameterException;
 
     /**
      * Start the spamming
      */
     protected void spam() {
-        URL url = this.createConnnection();
+        URL url = this.createConnection();
 
         //Get those UserCredentials and use them to log in
         UserCredentials UC = this.getCredentials();
         this.logIn(UC);
 
         // For testing purposes go ahead and add default parameters
-        PostParameters postP = new PostParameters();
-        postP.addDefaults();
+        PostParameters postP = null;
+        try {
+            postP = this.getParameters();
+        } catch (MalformedParameterException e) {
+            System.err.print(e.toString());
+            System.exit(-3);
+        }
 
         // Post those parameters!
         this.post(url, postP);

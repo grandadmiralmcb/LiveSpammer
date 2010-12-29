@@ -5,6 +5,7 @@
  */
 
 import java.io.*;
+import java.util.HashMap;
 
 /**
  * A command line implementation of the LiveSpammer :)
@@ -40,5 +41,18 @@ public class CommandLineSpammer extends LSInterface {
         }
 
         return null; //will never get here
+    }
+
+    //TODO
+    @Override
+    HashMap<String, String> getParametersFromFile(File file)
+            throws MalformedParameterException {
+        return null;
+    }
+
+    //TODO
+    @Override
+    PostParameters getParameters() throws MalformedParameterException {
+        return null;
     }
 }

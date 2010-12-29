@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import java.util.Map;
  * This class holds a map of the parameters you would like to post
  */
 public class PostParameters {
+
     Map<String, String> parameterMap;
 
     /**
@@ -18,6 +20,10 @@ public class PostParameters {
      */
     PostParameters() {
         parameterMap = new HashMap<String, String>();
+    }
+
+    PostParameters(HashMap<String, String> paramMap) {
+        this.parameterMap = paramMap;
     }
 
     /**

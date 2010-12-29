@@ -22,7 +22,7 @@ public abstract class LSInterface {
     * of the xbox live messaging site
     * @return The created connection
     */
-    private URL createConnection() {
+    protected URL createConnection() {
         return createConnection(
                 "http://live.xbox.com/en-US/MessageCenter/Compose");
     }
@@ -32,7 +32,7 @@ public abstract class LSInterface {
      * @param url The url to connect to
      * @return The created connection
      */
-    private URL createConnection(String url) {
+    protected URL createConnection(String url) {
         try {
             return new URL(url);
         } catch (MalformedURLException e) {
@@ -47,7 +47,7 @@ public abstract class LSInterface {
      * Log in to the system
      * @param cred The user name and password of the person logging in.
      */
-    private void logIn(UserCredentials cred) {
+    protected void logIn(UserCredentials cred) {
         Authenticator auth = new MyAuthenticator(cred);
         Authenticator.setDefault(auth);
     }
@@ -57,7 +57,7 @@ public abstract class LSInterface {
      * @param postP The POST parameters
      * @param url The url to POST to
      */
-    private void post(URL url, PostParameters postP) {
+    protected void post(URL url, PostParameters postP) {
 
         try {
             ClientHttpRequest con = new ClientHttpRequest(url);

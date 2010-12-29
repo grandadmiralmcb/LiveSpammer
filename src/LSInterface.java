@@ -15,13 +15,12 @@ import java.net.URL;
  */
 public abstract class LSInterface {
 
-
     /**
     * Overloaded create connection, just calls with default paramater
     * of the xbox live messaging site
     * @return The created connection
     */
-    public URL createConnnection() {
+    private URL createConnnection() {
         return createConnection(
                 "http://live.xbox.com/en-US/MessageCenter/Compose");
     }
@@ -31,7 +30,7 @@ public abstract class LSInterface {
      * @param url The url to connect to
      * @return The created connection
      */
-    public URL createConnection(String url) {
+    private URL createConnection(String url) {
         try {
             return new URL(url);
         } catch (MalformedURLException e) {
@@ -46,7 +45,7 @@ public abstract class LSInterface {
      * Log in to the system
      * @param cred The user name and password of the person logging in.
      */
-    public void logIn(UserCredentials cred) {
+    private void logIn(UserCredentials cred) {
         Authenticator auth = new MyAuthenticator(cred);
         Authenticator.setDefault(auth);
     }
@@ -55,9 +54,8 @@ public abstract class LSInterface {
      * Post parameters to website
      * @param postP The POST parameters
      * @param url The url to POST to
-     * @return true if message sent successfully, false if otherwise
      */
-    public void post(URL url, PostParameters postP) {
+    private void post(URL url, PostParameters postP) {
 
         try {
             ClientHttpRequest con = new ClientHttpRequest(url);
@@ -67,5 +65,29 @@ public abstract class LSInterface {
             e.printStackTrace();
             System.exit(-2);
         }
+    }
+
+    /**
+     * Force implementation of this method
+     * @return The credentials (containing username and password)
+     */
+    abstract UserCredentials getCredentials();
+
+    /**
+     * Start the spamming
+     */
+    protected void spam() {
+        URL url = this.createConnnection();
+
+        //Get those UserCredentials and use them to log in
+        UserCredentials UC = this.getCredentials();
+        this.logIn(UC);
+
+        // For testing purposes go ahead and add default parameters
+        PostParameters postP = new PostParameters();
+        postP.addDefaults();
+
+        // Post those parameters!
+        this.post(url, postP);
     }
 }

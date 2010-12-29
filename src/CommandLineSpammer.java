@@ -11,6 +11,10 @@ import java.io.*;
  */
 public class CommandLineSpammer extends LSInterface {
 
+    CommandLineSpammer() {
+        spam();
+    }
+
     // I get damn tired of typing System.out
     static PrintStream out = new PrintStream(System.out);
 

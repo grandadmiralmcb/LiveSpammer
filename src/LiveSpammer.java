@@ -1,5 +1,3 @@
-import java.net.URL;
-
 /**
  * This application right now is only for live.xbox.com
  * However the way it is made it can be used for any site that takes POST
@@ -15,21 +13,12 @@ public class LiveSpammer {
     public static void main(String[] args) {
 
         //Create new command line interface
-        //This can be changd to GUISpammer later
+        //This can be changed to GUISpammer later
         //For right now just connects to live.xbox.com
-        CommandLineSpammer run = new CommandLineSpammer();
-        URL url = run.createConnnection();
+        //new CommandLineSpammer();
 
-        //Get those UserCredentials and use them to log in
-        UserCredentials UC = run.getCredentials();
-        run.logIn(UC);
-
-        // For testing purposes go ahead and add default parameters
-        PostParameters postP = new PostParameters();
-        postP.addDefaults();
-
-        // Post those parameters!
-        run.post(url, postP);
+        LSGUI window = new LSGUI();
+        new GUISpammer(window);
 
         /**
          * TODO

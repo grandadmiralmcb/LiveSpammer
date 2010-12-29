@@ -17,8 +17,7 @@ public class LiveSpammer {
         //For right now just connects to live.xbox.com
         //new CommandLineSpammer();
 
-        LSGUI window = new LSGUI();
-        new GUISpammer(window);
+        new LSGUI();
 
         /**
          * TODO

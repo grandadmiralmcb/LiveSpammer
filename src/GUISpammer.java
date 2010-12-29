@@ -13,13 +13,7 @@ public class GUISpammer extends LSInterface {
      */
     GUISpammer(LSGUI window) {
         this.window = window;
-        /**
-         * TODO
-         *   Add button listener to LSGUI window
-         *   on button click event start spamming
-         */
-
-        //spam();
+        spam();
     }
 
     /**
